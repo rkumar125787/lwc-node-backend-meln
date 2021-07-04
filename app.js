@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 // app.use('/api/accounts', accountsRoute);
 
-app.use('/api/accounts', accountRoutes);
+app.use('/', accountRoutes);
 mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.wpbzh.mongodb.net/sfdc?retryWrites=true&w=majority`).
     then(() => {
         app.listen(process.env.PORT || port);
