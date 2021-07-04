@@ -5,5 +5,5 @@ const accountController = require('../controllers/account-controller');
 router.get('/', (req, res, next) => {
     res.status(200).send({ status: 'OK' })
 })
-router.post('/api/accounts', [check('name').not().isEmpty(), check('address').not().isEmpty()], accountController.createAccount);
+router.post('/api/accounts', accountController.createAccount);
 module.exports = router;
