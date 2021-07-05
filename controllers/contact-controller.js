@@ -2,6 +2,7 @@ const Contact = require('../models/contact');
 const HttpError = require('../models/http-error');
 
 const createContact = async (req, res, next) => {
+    const error = validateSync();
     const { firstname, lastname, email, creator, createdbysfid } = req.body;
     const contact = new Contact({ firstname, lastname, email, creator, createdbysfid });
     let newContact;
