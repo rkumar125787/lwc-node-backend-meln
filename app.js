@@ -3,18 +3,19 @@ const dotenv = require('dotenv');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const accountRoutes = require('./routes/account-routes');
+// const accountRoutes = require('./routes/account-routes');
+const contactRoutes = require('./routes/contact-routes');
 const HttpError = require('./models/http-error');
+
+
 dotenv.config();
-const port = 5000;
 app.use(bodyParser.json());
 
 
-
-
-app.use('/', accountRoutes);
+// app.use('/', accountRoutes);
+app.use('/api/contacts', contactRoutes)
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*'); // setting origin to allow from browser
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Content-Type ,Accept,Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
     next();
