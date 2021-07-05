@@ -1,14 +1,30 @@
 const express = require('express');
-const port = 5000;
+const dotenv = require('dotenv');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const accountRoutes = require('./routes/account-routes');
+const HttpError = require('./models/http-error');
+dotenv.config();
+const port = 5000;
 app.use(bodyParser.json());
 
-// app.use('/api/accounts', accountsRoute);
+
+
 
 app.use('/', accountRoutes);
+app.use((req, res, next) => {
+    const error = new HttpError('Could not find this route.', 404);
+    throw error;
+});
+
+app.use((error, req, res, next) => {
+    if (res.headerSent) {
+        return next(error);
+    }
+    res.status(error.code || 500);
+    res.json({ message: error.message || 'An unknown error occurred!' });
+});
 mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.wpbzh.mongodb.net/sfdc?retryWrites=true&w=majority`).
     then(() => {
         app.listen(process.env.PORT || port);
@@ -16,6 +32,6 @@ mongoose.connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@
     }).
     catch(
         err => {
-            console.log(err);
+            console.log(`error->` + JSON.stringify(err));
         }
     )
