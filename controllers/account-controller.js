@@ -13,7 +13,7 @@ const createAccount = async (req, res, next) => {
         const err = new HttpError(`Account can't be created` + JSON.stringify(e.message), 402);
         return next(err);
     }
-    res.status(201).json({ account: createdAccount.toObject({ getters: true }) });
+    res.status(201).send({ account: createdAccount.toObject({ getters: true }) });
 }
 
 const getAccount = async (req, res, next) => {
@@ -24,7 +24,7 @@ const getAccount = async (req, res, next) => {
     catch (e) {
         return next(new HttpError(`Issue fetching place`, 401));
     }
-    res.json({ accounts: accounts.map(account => account.toObject({ getters: true })) });
+    res.status(201).json({ accounts: accounts.map(account => account.toObject({ getters: true })) });
 }
 exports.createAccount = createAccount;
 exports.getAccount = getAccount;
