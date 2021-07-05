@@ -23,5 +23,11 @@ const getContacts = async (req, res, next) => {
     }
     res.status(200).json({ contacts: contacts.map(contact => contact.toObject({ getters: true })) });
 }
+
+const deleteContacts = async (req, res, next) => {
+    const rid = req.params.id;
+    res.json({ rid: rid });
+}
 exports.createContact = createContact;
 exports.getContacts = getContacts;
+exports.deleteContacts = deleteContacts;
