@@ -26,7 +26,15 @@ const getContacts = async (req, res, next) => {
 
 const deleteContacts = async (req, res, next) => {
     const rid = req.params.rid;
-    res.json({ rid: rid });
+    let contact;
+    try {
+        contact = await Contact.findById(rid);
+        await contact.remove();
+    }
+    catch (e) {
+        return next(new HttpError(`Contact deleted failed ${JSON.stringify(e.message)}`, 500));
+    }
+    res.status(200).json({ message: `Contact with id ${rid} deleted successfully` });
 }
 exports.createContact = createContact;
 exports.getContacts = getContacts;
