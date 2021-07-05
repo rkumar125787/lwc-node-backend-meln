@@ -25,7 +25,7 @@ const getContacts = async (req, res, next) => {
 }
 
 const deleteContacts = async (req, res, next) => {
-    const rid = req.params.id;
+    const rid = req.params.rid;
     res.json({ rid: rid });
 }
 exports.createContact = createContact;
