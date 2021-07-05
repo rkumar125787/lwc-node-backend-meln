@@ -13,7 +13,7 @@ const createAccount = async (req, res, next) => {
         const err = new HttpError(`Account can't be created` + JSON.stringify(e.message), 402);
         return next(err);
     }
-    res.status(201).send({ account: createdAccount.toObject({ getters: true }) });
+    res.status(201).json({ account: createdAccount.toObject({ getters: true }) });
 }
 
 const getAccount = async (req, res, next) => {
