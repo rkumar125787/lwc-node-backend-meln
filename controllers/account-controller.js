@@ -24,7 +24,7 @@ const getAccount = async (req, res, next) => {
     catch (e) {
         return next(new HttpError(`Issue fetching place`, 401));
     }
-    res.status(201).json({ accounts: accounts.map(account => account.toObject({ getters: true })) });
+    res.json({ accounts: accounts.map(account => account.toObject({ getters: true })) });
 }
 exports.createAccount = createAccount;
 exports.getAccount = getAccount;
