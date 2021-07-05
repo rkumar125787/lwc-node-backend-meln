@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 
 // app.use('/', accountRoutes);
-app.use('/api/contacts', contactRoutes)
+app.use('/', contactRoutes)
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); // setting origin to allow from browser
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With,Content-Type ,Accept,Authorization');
